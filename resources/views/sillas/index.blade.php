@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('titulo', 'Sillas')
 @section('content')
-    <h2 class="texto-blanco pt-5 pb-3">Sillas</h2>
+    <h2 class="texto-blanco pt-5 pb-3 h1">Sillas</h2>
     @if ($mensaje = Session::get('exito'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <p>{{ $mensaje }}</p>
@@ -13,6 +13,7 @@
             <tr>
                 <th>Descripcion</th>
                 <th>Sala</th>
+                <th>Disponibilidad</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <tr>
                     <td> {{ $silla->descripcionSilla }} </td>
                     <td> {{ $silla->nombre }} </td>
+                    <td> {{ $silla->disponibilidad }} </td>
                     <td>
                         <a href="{{ route('sillas.show', $silla->id) }}" class="btn btn-info">Detalles</a>
                         <a href="{{ route('sillas.edit', $silla->id) }}" class="btn btn-warning">Editar</a>

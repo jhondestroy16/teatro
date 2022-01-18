@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sala;
 use App\Models\Silla;
+use App\Models\Reserva;
 
 class SalaController extends Controller
 {
@@ -60,12 +61,27 @@ class SalaController extends Controller
             ->select('sillas.descripcion as descripcionSilla', 'salas.*')
             ->where('sala_id', '=', $id)
             ->get();
+        $reservas = Reserva::join('salas', 'reservas.sala_id', '=', 'salas.id')
+            ->select('salas.*', 'reservas.*')
+            ->get();
         $cantidadTotal = DB::table('salas')
             ->select()
             ->count('*');
+        $contadorSalaA = 0;
+        $contadorSalaB = 0;
+        $contadorSalaC = 0;
+        foreach ($reservas as $reserva) {
+            if ($reserva->nombre == "Sala A") {
+                $contadorSalaA++;
+            } else if ($reserva->nombre == "Sala B") {
+                $contadorSalaB++;
+            } else {
+                $contadorSalaC++;
+            }
+        }
         $sala = Sala::FindOrFail($id);
 
-        return view('salas.view', compact('sillas', 'sala','cantidadTotal'));
+        return view('salas.view', compact('sillas', 'sala', 'cantidadTotal','contadorSalaA','contadorSalaB','contadorSalaC'));
     }
 
     /**

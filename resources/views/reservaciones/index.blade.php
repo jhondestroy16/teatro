@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('titulo', 'Reservaciones')
 @section('content')
-    <h2 class="texto-blanco pt-5 pb-3">Reservaciones</h2>
+    <h2 class="texto-blanco pt-5 pb-3 h1">Reservaciones</h2>
     @if ($mensaje = Session::get('exito'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <p>{{ $mensaje }}</p>

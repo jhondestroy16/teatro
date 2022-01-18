@@ -36,8 +36,8 @@ class ReservaController extends Controller
      */
     public function create()
     {
-        $salas = Sala::orderBy('nombre', 'asc')->get();
         $sillas = DB::select('SELECT DISTINCT * FROM sillas WHERE disponibilidad = "Si"');
+        $salas = Sala::orderBy('nombre', 'asc')->get();
         $usuarios = User::orderBy('name', 'asc')->get();
 
         return view('reservaciones.insert', compact('salas', 'sillas', 'usuarios'));
@@ -98,11 +98,46 @@ class ReservaController extends Controller
             ->select('sillas.descripcion as descripcionSilla', 'salas.*', 'users.*', 'reservas.*')
             ->where('reservas.id', '=', $id)
             ->first();
-
+        $edades = Reserva::join('users', 'reservas.user_id', '=', 'users.id')
+            ->select('users.*', 'reservas.*')
+            ->get();
         $cantidadReservas = DB::table('reservas')
             ->select()->count('*');
+        $total = 0;
+        $promedio = 0;
+        $contadorHombres = 0;
+        $contadorMujeres = 0;
+        $contadorFumadores = 0;
+        $mensaje = "";
+        $contadorMayor = 0;
+        $contadorMenor = 0;
+        foreach ($edades as $edad) {
+            $total = (($edad->edad) + $total);
+            if($edad->genero == "Masculino"){
+                $contadorHombres++;
+            }else{
+                $contadorMujeres++;
+            }
 
-        return view('reservaciones.view', compact('reservacion', 'cantidadReservas', 'user'));
+            if($edad->fumador == "Si"){
+                $contadorFumadores++;
+            }
+
+            if($edad->edad >= 18){
+                $contadorMayor++;
+            }else{
+                $contadorMenor++;
+            }
+        }
+        if($contadorMayor > $contadorMenor){
+            $mensaje = "Mayores de edad";
+        }else{
+            $mensaje = "Menores de edad";
+        }
+        $promedio = $total / $cantidadReservas;
+
+
+        return view('reservaciones.view', compact('reservacion', 'cantidadReservas', 'user','promedio','contadorMujeres','contadorHombres','contadorFumadores','mensaje'));
     }
 
     /**

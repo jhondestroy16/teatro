@@ -43,6 +43,11 @@
                                             </a>
                                             <p class="description">
                                                 <b>Cantidad de reservas totales: </b> {{ $cantidadReservas }} <br>
+                                                <b>Promedio de edades: </b> {{ $promedio }} <br>
+                                                <b>Cantidad hombres: </b> {{ $contadorHombres }} <br>
+                                                <b>Cantidad mujeres: </b> {{ $contadorMujeres }} <br>
+                                                <b>Cantidad fumadores: </b> {{ $contadorFumadores }} <br>
+                                                <b>Mayores de edad o menores de edad: </b> {{ $mensaje }} <br>
                                             </p>
                                         </div>
                                         </p>

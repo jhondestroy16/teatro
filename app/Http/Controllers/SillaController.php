@@ -17,7 +17,8 @@ class SillaController extends Controller
     public function index()
     {
         $sillas = Silla::join('salas', 'sillas.sala_id', '=', 'salas.id')
-            ->select('sillas.descripcion as descripcionSilla', 'salas.*')
+            ->select('sillas.descripcion as descripcionSilla','sillas.disponibilidad', 'salas.*')
+            ->orderBy('salas.nombre','asc')
             ->simplePaginate(5);
 
         return view('sillas.index', compact('sillas'));

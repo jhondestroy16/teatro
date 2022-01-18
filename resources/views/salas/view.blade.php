@@ -23,6 +23,12 @@
                                             <p class="description text-center">
                                                 <b>Nombre de la sala: </b> {{ $sala->nombre }} <br>
                                                 <b>Descripcion de la sala: </b> {{ $sala->descripcion }} <br>
+                                                En la sala A se encuentran {{ $contadorSalaA }} reservas de
+                                                {{ $cantidadTotal }} reservaciones <br>
+                                                En la sala B se encuentran {{ $contadorSalaB }} reservas de
+                                                {{ $cantidadTotal }} reservaciones <br>
+                                                En la sala C se encuentran {{ $contadorSalaC }} reservas de
+                                                {{ $cantidadTotal }} reservaciones <br>
                                             </p>
                                         </div>
                                         </p>
@@ -40,9 +46,11 @@
                                                 @foreach ($sillas as $silla)
                                                     <tr>
                                                         <td><b>Nombre de la sala: </b>{{ $silla->nombre }}<br></td>
-                                                        <td><b>Descripcion de la silla: </b>{{ $silla->descripcionSilla }}<br></td><br>
+                                                        <td><b>Descripcion de la silla:
+                                                            </b>{{ $silla->descripcionSilla }}<br></td><br>
                                                     </tr>
                                                 @endforeach
+
                                             </p>
                                         </div>
                                         </p>
@@ -50,13 +58,12 @@
                                 </div>
                             </div>
                             <!--end card user 2-->
-                            Cantidad total de salas: {{ $cantidadTotal }}
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <div class="button-container">
-                        <a href="{{ route('salas.index') }}" class="btn btn-primary mt-3">Volver</a>
+                    <div class="card-footer">
+                        <div class="button-container">
+                            <a href="{{ route('salas.index') }}" class="btn btn-primary mt-3">Volver</a>
+                        </div>
                     </div>
                 </div>
             </div>
