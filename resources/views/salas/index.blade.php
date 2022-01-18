@@ -35,4 +35,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pt-3 pb-3">
+        {{ $salas->links() }}
+    </div>
 @endsection

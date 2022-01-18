@@ -24,7 +24,7 @@ class ReservaController extends Controller
             ->join('salas', 'reservas.sala_id', '=', 'salas.id')
             ->join('sillas', 'reservas.silla_id', '=', 'sillas.id')
             ->select('sillas.descripcion as descripcionSilla', 'salas.*', 'users.*', 'reservas.*')
-            ->get();
+            ->simplePaginate(5);
 
         return view('reservaciones.index', compact('reservaciones'));
     }
@@ -52,7 +52,6 @@ class ReservaController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $idUser = Auth::id();
 
         $request->validate([
             'user_id' => ['required'],

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Sala;
+use App\Models\Silla;
 
 class SalaController extends Controller
 {
@@ -14,7 +16,7 @@ class SalaController extends Controller
      */
     public function index()
     {
-        $salas = Sala::orderBy('nombre', 'asc')->get();
+        $salas = Sala::orderBy('nombre', 'asc')->simplePaginate(5);
 
         return view('salas.index', compact('salas'));
     }
@@ -43,7 +45,7 @@ class SalaController extends Controller
         ]);
         $sala = Sala::create($request->all());
 
-        return redirect()->route('salas.index')->with('exito','Se ha registrado la sala exitosamente');
+        return redirect()->route('salas.index')->with('exito', 'Se ha registrado la sala exitosamente');
     }
 
     /**
@@ -54,7 +56,16 @@ class SalaController extends Controller
      */
     public function show($id)
     {
-        //
+        $sillas = Silla::join('salas', 'sillas.sala_id', '=', 'salas.id')
+            ->select('sillas.descripcion as descripcionSilla', 'salas.*')
+            ->where('sala_id', '=', $id)
+            ->get();
+        $cantidadTotal = DB::table('salas')
+            ->select()
+            ->count('*');
+        $sala = Sala::FindOrFail($id);
+
+        return view('salas.view', compact('sillas', 'sala','cantidadTotal'));
     }
 
     /**

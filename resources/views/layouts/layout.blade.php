@@ -30,6 +30,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('salas.index') }}">Listar salas</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('salas.create') }}">Registrar
                                     Sala</a></li>
                         </ul>
@@ -41,6 +42,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('sillas.index') }}">Listar sillas</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('sillas.create') }}">Registrar
                                     Sillas</a></li>
                         </ul>
@@ -52,6 +54,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('reservaciones.index') }}">Listar reservaciones</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('reservaciones.create') }}">Registrar
                                     Reservacion</a></li>
                         </ul>
@@ -98,6 +101,9 @@
     <div class="container">
         @yield('content')
     </div>
+    <footer class="card-footer text-muted texto-blanco footer">
+        Desarrollado por <span class="fw-bold">Jhon Steven Valencia Guzmán</span> &copy; 2021
+    </footer>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>

@@ -30,7 +30,7 @@
                                 <h4> <b>Nombre de la sala:</b> </h4>
                             </label>
                             <input type="text" name="nombre" id="nombre" class="form-control"
-                                value="{{ old('nombre') }}">
+                                placeholder="Nombre de la sala" value="{{ old('nombre') }}">
                         </div>
                     </div>
                 </div>
@@ -41,13 +41,13 @@
                                 <h4> <b>Descripcion de la sala:</b> </h4>
                             </label>
                             <input type="text" name="descripcion" id="descripcion" class="form-control"
-                                value="{{ old('descripcion') }}">
+                                placeholder="Descripcion de la sala" value="{{ old('descripcion') }}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class ="pt-5 pb-3">
+        <div class="pt-5 pb-3">
             <button type="submit" class="btn btn-primary mb-4" onclick="return confirm('¿Desea agregar la sala?')">
                 Guardar
             </button>

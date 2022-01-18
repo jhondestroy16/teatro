@@ -1,9 +1,9 @@
 @extends('layouts.layout')
 
-@section('titulo', 'Registrar silla')
+@section('titulo', 'Registrar reservacion')
 
 @section('content')
-    <h2 class="texto-blanco pt-5 pb-3">Registrar Silla</h2>
+    <h2 class="texto-blanco pt-5 pb-3">Registrar reservacion</h2>
     @if ($errors->any())
 
         <div class="alert alert-danger">
@@ -19,7 +19,7 @@
 
     @endif
     <form class="my-3" action="{{ route('reservaciones.update', $reserva->id) }}" method="post">
-        @method('post')
+        @method('PUT')
         @csrf
         <div class="card mt-4">
             <div class="card-body shadow">

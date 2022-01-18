@@ -19,7 +19,7 @@
 
     @endif
     <form class="my-3" action="{{ route('sillas.update', $silla->id) }}" method="post">
-        @method('post')
+        @method('PUT')
         @csrf
         <div class="card mt-4">
             <div class="card-body shadow">

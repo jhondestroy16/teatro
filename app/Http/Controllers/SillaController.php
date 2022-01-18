@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Silla;
 use App\Models\Sala;
 
@@ -17,7 +18,7 @@ class SillaController extends Controller
     {
         $sillas = Silla::join('salas', 'sillas.sala_id', '=', 'salas.id')
             ->select('sillas.descripcion as descripcionSilla', 'salas.*')
-            ->get();
+            ->simplePaginate(5);
 
         return view('sillas.index', compact('sillas'));
     }
@@ -59,7 +60,16 @@ class SillaController extends Controller
      */
     public function show($id)
     {
-        //
+        $sala = Silla::join('salas', 'sillas.sala_id', '=', 'salas.id')
+            ->select('sillas.id', 'sillas.descripcion as descripcionSilla', 'salas.*')
+            ->where('sillas.id', '=', $id)
+            ->first();
+        $cantidadTotal = DB::table('sillas')
+            ->select()
+            ->count('*');
+        $silla = Silla::findOrFail($id);
+
+        return view('sillas.view', compact('silla', 'sala', 'cantidadTotal'));
     }
 
     /**
