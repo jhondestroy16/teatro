@@ -113,31 +113,33 @@ class ReservaController extends Controller
         $contadorMenor = 0;
         foreach ($edades as $edad) {
             $total = (($edad->edad) + $total);
-            if($edad->genero == "Masculino"){
+            if ($edad->genero == "Masculino") {
                 $contadorHombres++;
-            }else{
+            } else {
                 $contadorMujeres++;
             }
 
-            if($edad->fumador == "Si"){
+            if ($edad->fumador == "Si") {
                 $contadorFumadores++;
             }
 
-            if($edad->edad >= 18){
+            if ($edad->edad >= 18) {
                 $contadorMayor++;
-            }else{
+            } else {
                 $contadorMenor++;
             }
         }
-        if($contadorMayor > $contadorMenor){
+        if ($contadorMayor > $contadorMenor) {
             $mensaje = "Mayores de edad";
-        }else{
+        } else if ($contadorMenor > $contadorMayor) {
             $mensaje = "Menores de edad";
+        } else {
+            $mensaje = "Igualdad";
         }
         $promedio = $total / $cantidadReservas;
 
 
-        return view('reservaciones.view', compact('reservacion', 'cantidadReservas', 'user','promedio','contadorMujeres','contadorHombres','contadorFumadores','mensaje'));
+        return view('reservaciones.view', compact('reservacion', 'cantidadReservas', 'user', 'promedio', 'contadorMujeres', 'contadorHombres', 'contadorFumadores', 'mensaje'));
     }
 
     /**

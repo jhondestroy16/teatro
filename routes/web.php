@@ -24,7 +24,7 @@ Route::get('/', function () {
 })->name('inicio');
 
 Auth::routes();
-Route::resource('salas', SalaController::class);
-Route::resource('sillas', SillaController::class);
-Route::resource('reservaciones', ReservaController::class);
+Route::resource('salas', SalaController::class)->middleware('can:salas');
+Route::resource('sillas', SillaController::class)->middleware('can:sillas');
+Route::resource('reservaciones', ReservaController::class)->middleware('can:reservaciones');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

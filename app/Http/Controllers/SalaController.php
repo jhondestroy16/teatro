@@ -64,7 +64,7 @@ class SalaController extends Controller
         $reservas = Reserva::join('salas', 'reservas.sala_id', '=', 'salas.id')
             ->select('salas.*', 'reservas.*')
             ->get();
-        $cantidadTotal = DB::table('salas')
+        $cantidadTotal = DB::table('reservas')
             ->select()
             ->count('*');
         $contadorSalaA = 0;
