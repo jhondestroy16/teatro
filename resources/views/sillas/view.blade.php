@@ -2,6 +2,7 @@
 
 @section('titulo', 'Salas')
 @section('content')
+    <h2 class="texto-blanco pt-5 pb-3 h1">{{ $silla->descripcion }}</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 my-5">
@@ -38,7 +39,8 @@
                                             <p class="description">
                                                 <tr>
                                                     <td><b>Nombre de la sala: </b>{{ $sala->nombre }}<br></td>
-                                                    <td><b>Descripcion de la silla: </b>{{ $sala->descripcion }}<br></td><br>
+                                                    <td><b>Descripcion de la silla: </b>{{ $sala->descripcion }}<br></td>
+                                                    <br>
                                                 </tr>
                                             </p>
                                         </div>

@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('titulo', 'Reservas')
 @section('content')
+    <h2 class="texto-blanco pt-5 pb-3 h1">Reservacion de {{ $reservacion->name }}</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 my-5">
@@ -22,10 +23,17 @@
                                             </a>
                                             <p class="description">
                                                 <tr>
-                                                    <td> <b>Nombre usuario: </b> {{ $reservacion->name }} <br></td>
-                                                    <td> <b>Nombre sala: </b> {{ $reservacion->nombre }} <br></td>
-                                                    <td> <b>Descripcion sala: </b>{{ $reservacion->descripcion }} <br></td>
-                                                    <td> <b>Descripcion silla: </b>{{ $reservacion->descripcionSilla }}<br></td>
+                                                    <td> <b>Nombre usuario: </b> {{ $reservacion->name }}<br></td>
+                                                    <td> <b>Email del usuario: </b> {{ $reservacion->email }}<br></td>
+                                                    <td> <b>Genero: </b> {{ $reservacion->genero }}<br></td>
+                                                    <td> <b>Edad: </b> {{ $reservacion->edad }} años<br></td>
+                                                    <td> <b>¿Fumador?: </b> {{ $reservacion->fumador }}<br></td><br>
+                                                </tr>
+                                                <tr>
+                                                    <td> <b>Nombre sala: </b> {{ $reservacion->nombre }}<br></td>
+                                                    <td> <b>Descripcion sala: </b>{{ $reservacion->descripcion }}<br></td>
+                                                    <td> <b>Descripcion silla:
+                                                        </b>{{ $reservacion->descripcionSilla }}<br></td>
                                                 </tr>
                                             </p>
                                         </div>

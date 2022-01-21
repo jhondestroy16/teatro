@@ -38,9 +38,8 @@ class ReservaController extends Controller
     {
         $sillas = DB::select('SELECT DISTINCT * FROM sillas WHERE disponibilidad = "Si"');
         $salas = Sala::orderBy('nombre', 'asc')->get();
-        $usuarios = User::orderBy('name', 'asc')->get();
 
-        return view('reservaciones.insert', compact('salas', 'sillas', 'usuarios'));
+        return view('reservaciones.insert', compact('salas', 'sillas'));
     }
 
     /**
@@ -51,35 +50,51 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
+        $idUser = Auth::id();
         $user = Auth::user();
 
         $request->validate([
-            'user_id' => ['required'],
             'sala_id' => ['required'],
             'silla_id' => ['required']
         ]);
 
         $sala = Sala::all()->where('id', '=', $request->sala_id)->first();
         if (($user->edad < 18) && ($sala->nombre === "Sala A")) {
-            Reserva::create($request->all());
+            $reserva = Reserva::create($request->all());
+            $id = $reserva->id;
+            DB::table('reservas')
+                ->where('id', $id)
+                ->update(['user_id' => $idUser]);
+
             DB::table('sillas')
                 ->where('id', $request->silla_id)
                 ->update(['disponibilidad' => 'No']);
             return redirect()->route('reservaciones.index')->with('exito', 'Se ha registrado la reservacion exitosamente');
         } else if (($user->edad >= 18) && ($sala->nombre === "Sala B") && ($user->fumador == "Si")) {
+
+            $reserva = Reserva::create($request->all());
+            $id = $reserva->id;
             DB::table('sillas')
                 ->where('id', $request->silla_id)
                 ->update(['disponibilidad' => 'No']);
-            Reserva::create($request->all());
+            DB::table('reservas')
+                ->where('id', $id)
+                ->update(['user_id' => $idUser]);
             return redirect()->route('reservaciones.index')->with('exito', 'Se ha registrado la reservacion exitosamente');
         } else if (($user->edad >= 18) && ($sala->nombre === "Sala C") && ($user->fumador == "No")) {
+            $reserva = Reserva::create($request->all());
+            $id = $reserva->id;
             DB::table('sillas')
                 ->where('id', $request->silla_id)
                 ->update(['disponibilidad' => 'No']);
-            Reserva::create($request->all());
+
+            DB::table('reservas')
+                ->where('id', $id)
+                ->update(['user_id' => $idUser]);
+
             return redirect()->route('reservaciones.index')->with('exito', 'Se ha registrado la reservacion exitosamente');
         } else {
-            return redirect()->route('reservaciones.index')->with('exito', 'Error');
+            return redirect()->route('reservaciones.index')->with('exito', 'No cumples las condiciones establecidas');
         }
     }
 
@@ -91,6 +106,7 @@ class ReservaController extends Controller
      */
     public function show($id)
     {
+
         $user = Auth::user();
         $reservacion = Reserva::join('users', 'reservas.user_id', '=', 'users.id')
             ->join('salas', 'reservas.sala_id', '=', 'salas.id')
@@ -153,8 +169,7 @@ class ReservaController extends Controller
         $reserva = Reserva::findOrFail($id);
         $salas = Sala::orderBy('nombre', 'asc')->get();
         $sillas = Silla::orderBy('descripcion', 'asc')->get();
-        $usuarios = User::orderBy('name', 'asc')->get();
-        return view('reservaciones.edit', compact('sillas', 'salas', 'usuarios', 'reserva'));
+        return view('reservaciones.edit', compact('sillas', 'salas', 'reserva'));
     }
 
     /**
@@ -167,7 +182,6 @@ class ReservaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'user_id' => ['required'],
             'sala_id' => ['required'],
             'silla_id' => ['required']
         ]);

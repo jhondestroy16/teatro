@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('inicio') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{ asset('img/descarga.jpg') }}" alt="Logo" class="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -135,7 +135,7 @@
             @yield('content')
         </main>
         <footer class="card-footer text-muted texto-blanco footer">
-            Desarrollado por <span class="fw-bold">Jhon Steven Valencia Guzmán</span> &copy; 2021
+            Desarrollado por <span class="fw-bold">Jhon Steven Valencia Guzmán</span> &copy; 2022
         </footer>
     </div>
 </body>

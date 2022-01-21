@@ -23,42 +23,56 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropServicios"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Salas
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('salas.index') }}">Listar salas</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('salas.create') }}">Registrar
-                                    Sala</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropServicios"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sillas
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('sillas.index') }}">Listar sillas</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('sillas.create') }}">Registrar
-                                    Sillas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropServicios"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Reservaciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('reservaciones.index') }}">Listar reservaciones</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('reservaciones.create') }}">Registrar
-                                    Reservacion</a></li>
-                        </ul>
-                    </li>
+                    @can('salas')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropServicios" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Salas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('salas.index') }}">Listar salas</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('salas.create') }}">Registrar
+                                        Sala</a></li>
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('sillas')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropServicios" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Sillas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('sillas.index') }}">Listar sillas</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('sillas.create') }}">Registrar
+                                        Sillas</a></li>
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('reservaciones')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropServicios" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Reservaciones
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('reservaciones.index') }}">Listar
+                                        reservaciones</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('reservaciones.create') }}">Registrar
+                                        Reservacion</a></li>
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
@@ -83,7 +97,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
@@ -102,7 +116,7 @@
         @yield('content')
     </div>
     <footer class="card-footer text-muted texto-blanco footer">
-        Desarrollado por <span class="fw-bold">Jhon Steven Valencia Guzmán</span> &copy; 2021
+        Desarrollado por <span class="fw-bold">Jhon Steven Valencia Guzmán</span> &copy; 2022
     </footer>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>

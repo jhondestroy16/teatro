@@ -26,21 +26,6 @@
                 <div class="col">
                     <div class="mb-2">
                         <div class="mb-2">
-                            <label for="user_id" class="form-label texto my-2">
-                                <h4> <b>Usuario:</b> </h4>
-                            </label>
-                            <select name="user_id" class="form-control">
-                                <option selected disabled value="">Seleccione...</option>
-                                @foreach ($usuarios as $usuario)
-                                    <option value="{{ $usuario->id }}"> {{ $usuario->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="mb-2">
-                        <div class="mb-2">
                             <label for="sala_id" class="form-label texto my-2">
                                 <h4 class="texto">Sala:</h4>
                             </label>

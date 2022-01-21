@@ -2,6 +2,7 @@
 
 @section('titulo', 'Salas')
 @section('content')
+<h2 class="texto-blanco pt-5 pb-3 h1">{{ $sala->nombre }}</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 my-5">
