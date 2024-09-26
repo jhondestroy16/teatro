@@ -27,8 +27,7 @@
                         <form action="{{ route('salas.destroy', $sala->id) }}" method="post" class="d-inline-flex">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('¿Desea eliminar la sala  {{ $sala->nombre }}?')">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea eliminar la sala  {{ $sala->nombre }}?')">Eliminar</button>
                         </form>
                     </td>
                 </tr>

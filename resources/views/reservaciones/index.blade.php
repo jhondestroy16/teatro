@@ -18,6 +18,7 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($reservaciones) > 0)
             @foreach ($reservaciones as $reservacion)
                 <tr>
                     <td> {{ $reservacion->name }} </td>
@@ -29,12 +30,16 @@
                         <form action="{{ route('reservaciones.destroy', $reservacion->id) }}" method="post" class="d-inline-flex">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('¿Desea eliminar la reservacion  {{ $reservacion->descripcion }}?')">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea eliminar la reservacion  {{ $reservacion->descripcion }}?')">Eliminar</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
+            @else
+                <tr>
+                    <td class="text-center" colspan="4">No se encontraron registros</td>
+                </tr>
+            @endif
         </tbody>
     </table>
     <div class="pt-3 pb-3">
