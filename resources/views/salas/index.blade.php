@@ -17,6 +17,7 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($salas) > 0)
             @foreach ($salas as $sala)
                 <tr>
                     <td> {{ $sala->nombre }} </td>
@@ -32,6 +33,11 @@
                     </td>
                 </tr>
             @endforeach
+            @else
+                <tr>
+                    <td class="text-center" colspan="3">No se encontraron registros</td>
+                </tr>
+            @endif
         </tbody>
     </table>
     <div class="pt-3 pb-3">

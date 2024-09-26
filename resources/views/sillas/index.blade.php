@@ -18,23 +18,30 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($sillas as $silla)
+            @if (count($sillas) > 0)
+
+                @foreach ($sillas as $silla)
+                    <tr>
+                        <td> {{ $silla->descripcionSilla }} </td>
+                        <td> {{ $silla->nombre }} </td>
+                        <td> {{ $silla->disponibilidad }} </td>
+                        <td>
+                            <a href="{{ route('sillas.show', $silla->id) }}" class="btn btn-info">Detalles</a>
+                            <a href="{{ route('sillas.edit', $silla->id) }}" class="btn btn-warning">Editar</a>
+                            <form action="{{ route('sillas.destroy', $silla->id) }}" method="post" class="d-inline-flex">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('¿Desea eliminar la sala  {{ $silla->descripcion }}?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td> {{ $silla->descripcionSilla }} </td>
-                    <td> {{ $silla->nombre }} </td>
-                    <td> {{ $silla->disponibilidad }} </td>
-                    <td>
-                        <a href="{{ route('sillas.show', $silla->id) }}" class="btn btn-info">Detalles</a>
-                        <a href="{{ route('sillas.edit', $silla->id) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('sillas.destroy', $silla->id) }}" method="post" class="d-inline-flex">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('¿Desea eliminar la sala  {{ $silla->descripcion }}?')">Eliminar</button>
-                        </form>
-                    </td>
+                    <td class="text-center" colspan="4">No se encontraron registros</td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
 
     </table>
